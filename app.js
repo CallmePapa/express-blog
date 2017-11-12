@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
+var routes = require('./routes/index');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -14,6 +16,8 @@ var app = express();//生成一个express实例app.
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));//设置views文件夹为存放视图文件的目录
 app.set('view engine', 'ejs');//设置视图模板引擎为ejs.
+
+app.set('port', process.env.P0RT || 3000);
 
 
 // uncomment after placing your favicon in /public
@@ -47,3 +51,8 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;//导出app实例供其他模块调用
+
+routes(app);
+app.listen(app.get('port'), function () {
+    console.log("Express server listening on port" + app.get('port'));
+});
