@@ -4,9 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var mysql = require("mysql");
 
 
 var routes = require('./routes/index');
+var settings = require('./settings');
+var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -18,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));//设置views文件夹为存放�
 app.set('view engine', 'ejs');//设置视图模板引擎为ejs.
 
 app.set('port', process.env.P0RT || 3000);
-
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,6 +32,15 @@ app.use(bodyParser.urlencoded({extended: false}));//加载解析urlencoded请求
 app.use(cookieParser());//加载解析cookie的中间件
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹为存放静态文件的目录．
 
+app.use(session({
+    key: settings.db,//cookie name
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+    store: new mysql({
+        db: settings.db,
+        host: settings.host,
+        port: settings.port
+    })
+}));
 
 app.use('/', index);
 app.use('/users', users);//路由控制器．

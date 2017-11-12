@@ -1,0 +1,13 @@
+利用express框架创建一个多人博客．
+第一次提交：
+        安装express　［$ npm install -g express-generator］
+        新建一个工程：初始化一个express项目并且安装所需模块
+        　　　　　　　 ［$ express -e blog］
+              　　　　［$ cd blog && npm install］
+        启动项目：npm　start(或者node app.js)
+                在浏览器访问：localhost:3000;
+第二次提交：
+        路由控制：(在 app.js 中实现了简单的路由分配，然后再去 index.js 中找到对应的路由函数，最终实现路由功能。)
+                 把路由控制器和实现路由功能的函数都放到 index.js 里，app.js 中只有一个总的路由接口。
+        　　　　　运行npm　start;页面毫无变化．
+　　　　　添加路由规则
