@@ -1,9 +1,9 @@
-/**
- * Created by weiqiujuan on 17-11-12.
- */
-var settings = require('../settings'),
-    Db = require('mysql').Db,
-    Connection = require('mysql').Connection,
-    Server = require('mysql').Server;
-module.exports = new Db(settings.db, new Server(settings.host, settings.port),
-    {safe: true});
+var settings = require('../settings');
+
+function Db() {
+    db = settings.db;
+    host = settings.host;
+    port = settings.port;
+}
+
+module.exports = Db;

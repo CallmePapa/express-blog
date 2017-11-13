@@ -33,9 +33,10 @@ app.use(cookieParser());//加载解析cookie的中间件
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹为存放静态文件的目录．
 
 app.use(session({
+    secret:settings.cookieSercret,
     key: settings.db,//cookie name
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
-    store: new mysql({
+    store: new mysqlstore({
         db: settings.db,
         host: settings.host,
         port: settings.port
