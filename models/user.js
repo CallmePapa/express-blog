@@ -8,7 +8,7 @@ function User(user) {
     this.email = user.email;
 }
 module.exports = User;
-
+　
 //存储用户信息
 User.prototype.save = function (callback) {
     //要存入数据库的用户文档
