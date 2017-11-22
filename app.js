@@ -5,8 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var mysql = require("mysql");
-
+var MongoStore=require("connect-mongo")(session);
 
 var routes = require('./routes/index');
 var settings = require('./settings');
@@ -33,8 +32,6 @@ app.use(bodyParser.urlencoded({extended: false}));//加载解析urlencoded请求
 app.use(cookieParser());//加载解析cookie的中间件
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹为存放静态文件的目录．
 
-var session=require("express-session");
-var MongoStore=require("connect-mongo")(session);
 
 app.use(session({
     secret:settings.cookieSercret,
